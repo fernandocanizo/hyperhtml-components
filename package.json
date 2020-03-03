@@ -1,0 +1,24 @@
+{
+  "name": "hyperhtml-components",
+  "version": "0.0.1",
+  "description": "sample components to use with hyperhtml",
+  "main": "app/front/index.html",
+  "dependencies": {},
+  "devDependencies": {
+    "servor": "^3.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx servor --reload app/front/ index.html 3333"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fernandocanizo/hyperhtml-components.git"
+  },
+  "author": "Fernando L. Canizo <fernandocanizo@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fernandocanizo/hyperhtml-components/issues"
+  },
+  "homepage": "https://github.com/fernandocanizo/hyperhtml-components#readme"
+}
