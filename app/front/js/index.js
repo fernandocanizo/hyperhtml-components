@@ -1,4 +1,5 @@
-import { bind, wire, hyper } from 'https://unpkg.com/hyperhtml?module';
+import { bind, wire } from 'https://unpkg.com/hyperhtml?module';
+
 
 const Table = {
   html: bind(document.getElementById('table')),
@@ -29,7 +30,7 @@ const Table = {
     this.render();
   },
   render() {
-    return hyper`
+    return this.html`
     <table>
       <thead>
         <tr>
