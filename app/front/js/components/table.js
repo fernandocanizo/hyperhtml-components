@@ -3,14 +3,17 @@ import { bind, wire } from 'https://unpkg.com/hyperhtml?module';
 
 const Table = {
   html: bind(document.getElementById('table')),
+
   data: [
     { label: 'one', value: 1 },
     { label: 'two', value: 2 },
     { label: 'three', value: 3 }
   ],
+
   state: {
     sorted: ''
   },
+
   handleEvent(e) {
     // stop the regular link behaviour
     e.preventDefault();
@@ -20,15 +23,17 @@ const Table = {
     // array
     const attr = link.dataset.target;
     //check if the user clicked on the same attr
-    let asc = this.state.sorted === attr;
-    // simple sort, reverse the sort if asc is true
+    const ascending = this.state.sorted === attr;
+    const reverse = ascending ? 1 : -1;
+    // simple sort, reverse the sort if ascending is true
     this.data.sort((a, b) =>
-      (''+a[attr]).localeCompare(''+b[attr]) * (asc ? 1 : -1));
+      (String(a[attr])).localeCompare(String(b[attr])) * reverse);
     // update the sorted attr
-    this.state.sorted = asc ? '' : attr;
+    this.state.sorted = ascending ? '' : attr;
     // re-render
     this.render();
   },
+
   render() {
     return this.html`
     <table>
