@@ -28,16 +28,19 @@ export class Table extends Component {
     //no render set state will do a render
   }
   render() {
+    // Take column labels from first object
+    const headers = Object.keys(this.props.data[0]);
+    // TODO verify all objects share the same headers
+
     return this.html`
     <table id="${this.props.id}">
       <thead>
         <tr>
-          <th><a onclick="${this}" data-target="label" href="#">Label</a></th>
-          <th><a onclick="${this}" data-target="value" href="#">Value</a></th>
+          ${headers.map(v => `<th><a onclick="${this}" data-target="${v}" href="#">${v.toUpperCase()}</a></th>`)}
         </tr>
       </thead>
       <tbody>
-        ${this.props.data.map(obj => wire(obj) `<tr><td>${obj.label}</td><td>${obj.value}</td></tr>`)}
+        ${this.props.data.map(obj => wire(obj)`<tr>${headers.map(v => `<td>${obj[v]}</td>`)}</tr>`)}
       </tbody>
     </table>
   `;
