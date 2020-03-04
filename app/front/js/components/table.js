@@ -29,7 +29,7 @@ export class Table extends Component {
   }
   render() {
     return this.html`
-    <table id="${this.props.id}" class="table table-striped table-bordered table-sm">
+    <table id="${this.props.id}">
       <thead>
         <tr>
           <th><a onclick="${this}" data-target="label" href="#">Label</a></th>
