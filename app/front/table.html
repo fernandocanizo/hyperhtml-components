@@ -12,11 +12,19 @@
     <title>Hyperhtml Components</title>
   </head>
   <body>
-    <ul>
-      <li><a href="/table.with.object.html">Table with <strong>Object</strong></a></li>
-      <li><a href="/table.with.function.html">Table with <strong>Function</strong></a></li>
-      <li><a href="/table.with.class.html">Table with <strong>class</strong></a></li>
-      <li><a href="/table.html">Table with your data</a></li>
-    </ul>
+    <form id='data'>
+      <label for="yourData">Please insert a JSON arrays of objects to build your custom table:</label><br>
+      <textarea id="yourData" name="yourData" rows="40" cols="70" autofocus>
+        [
+          { "label": "fruta", "value": "2" },
+          { "label": "verdura", "value": "6" },
+          { "label": "fruta", "value": "12" }
+        ]
+      </textarea>
+      <button type="button" id="buildTable">Build table</button>
+    </form>
+
+    <div id="table"></div>
   </body>
+  <script type="module" src="/js/yourData.js"></script>
 </html>
