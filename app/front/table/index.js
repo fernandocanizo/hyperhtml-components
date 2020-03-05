@@ -1,26 +1,10 @@
-import { bind, wire } from 'https://unpkg.com/hyperhtml?module';
-import { Table } from './components/table.js';
+import { bind } from 'https://unpkg.com/hyperhtml?module';
+import { Table } from '../js/components/table.js';
 
-const buttonClick = (e) => {
-  e.preventDefault();
-  const dataEl = document.getElementById('yourData');
-  const formEl = document.getElementById('data');
-  const tableEl = document.getElementById('table')
+const data = [
+  { producto: 'banana', cantidad: 1, precio: 12.99 },
+  { producto: 'pera', cantidad: 2, precio: 1.99 },
+  { producto: 'papa', cantidad: 3, precio: 7.99 },
+];
 
-  try {
-    const data = JSON.parse(dataEl.value);
-    formEl.style = 'display: none';
-    renderTable(tableEl, data);
-  } catch (e) {
-    console.error(e);
-  }
-};
-
-const button = document.getElementById('buildTable');
-button.addEventListener('click', buttonClick);
-
-const html = bind();
-const renderTable = (elementToBind, data) => {
-  bind(elementToBind)`${new Table({ data, id: 'myTable' })}`;
-};
-
+bind(document.body)`${new Table({ data, id: 'myTable' })}`;
