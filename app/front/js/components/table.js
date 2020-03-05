@@ -2,6 +2,7 @@ import { bind, wire, Component }
   from 'https://unpkg.com/hyperhtml?module';
 import { thead } from './thead.js';
 import { tbody } from './tbody.js';
+import { tfooter } from './tfoot.js';
 
 class table extends Component {
   constructor(props) {
@@ -40,12 +41,10 @@ class table extends Component {
     const headers = Object.keys(this.props.data[0]);
 
     return this.html`
-    <table id="${this.props.id}">
-    <table id="${this.props.id}"
-      onsort="${this}"
-      >
+    <table id="${this.props.id}" onsort="${this}">
       ${thead.for(this).update(this.props)}
       ${tbody.for(this).update(this.props)}
+      ${tfoot.for(this).update(this.props)}
     </table>
   `;
   }
