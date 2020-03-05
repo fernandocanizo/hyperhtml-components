@@ -1,4 +1,4 @@
-import { bind, wire, Component } from 'https://unpkg.com/hyperhtml?module';
+import { wire, Component } from 'https://unpkg.com/hyperhtml?module';
 
 class thead extends Component {
   onclick(e) {
@@ -21,7 +21,13 @@ class thead extends Component {
     return this.html`
       <thead>
         <tr>
-          ${headers.map(v => `<th><a onclick="${this}" data-target="${v}" href="#">${v.toUpperCase()}</a></th>`)}
+          ${headers.map(v =>
+            wire()`<th>
+              <a onclick="${this}"
+                data-target="${v}"
+                href="#">${v.toUpperCase()}
+              </a>
+            </th>`)}
         </tr>
       </thead>
     `;

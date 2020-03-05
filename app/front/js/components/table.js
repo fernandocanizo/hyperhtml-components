@@ -1,12 +1,12 @@
 import { bind, wire, Component }
   from 'https://unpkg.com/hyperhtml?module';
 import { thead } from './thead.js';
+import { tbody } from './tbody.js';
 
 class table extends Component {
   constructor(props) {
     super();
     this.props = props;
-    console.log(props);
   }
 
   get defaultState() {
@@ -18,12 +18,11 @@ class table extends Component {
   }
 
   onsort(e) {
-    //console.log(e, this, e.currentTarget, e.detail)
     e.preventDefault();
     // get the sort details
     const {attr, asc} = e.detail;
     // simple sort, reverse the sort if asc is true
-    this.data.sort((a, b) =>
+    this.props.data.sort((a, b) =>
       (''+a[attr]).localeCompare(''+b[attr]) * (asc ? 1 : -1));
     // update the sorted attr
     this.setState({
@@ -43,11 +42,7 @@ class table extends Component {
       onsort="${this}"
       >
       ${thead.for(this).update(this.props)}
-      <tbody>
-        ${this.props.data.map(obj =>
-          wire(obj)`<tr>${headers.map(v =>
-            `<td>${obj[v]}</td>`)}</tr>`)}
-      </tbody>
+      ${tbody.for(this).update(this.props)}
     </table>
   `;
   }
