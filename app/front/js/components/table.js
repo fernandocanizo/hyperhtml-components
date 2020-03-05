@@ -11,22 +11,25 @@ class table extends Component {
 
   get defaultState() {
     return {
-      id: '',
-      data: [],
-      sorted: ''
-    }
+      sortColumn: '',
+      reverse: false,
+    };
   }
 
   onsort(e) {
     e.preventDefault();
     // get the sort details
-    const {attr, asc} = e.detail;
-    // simple sort, reverse the sort if asc is true
+    const { column } = e.detail;
+    const reverse = (column === this.state.sortColumn) ?
+      ! this.state.reverse : this.state.reverse;
+    // simple sort, reverse the sort if reverse state is true
     this.props.data.sort((a, b) =>
-      (''+a[attr]).localeCompare(''+b[attr]) * (asc ? 1 : -1));
-    // update the sorted attr
+      (String(a[column])).localeCompare(String(b[column]))
+        * (reverse ? -1 : 1));
+    // update the sorted column and reverse status
     this.setState({
-       sorted: asc ? '' : attr
+      sortColumn: column,
+      reverse,
     });
     // no render set state will do a render
   }

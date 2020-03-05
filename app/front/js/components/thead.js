@@ -6,12 +6,10 @@ class thead extends Component {
     e.preventDefault();
     // get the current link
     const link = e.target;
-    // read the attribute data-target, this will tell use how to sort the ary
-    const attr = link.dataset.target;
-    // check if the user clicked on the same attr
-    const asc = this.props.sorted === attr;
+    // read the attribute data-target, to know how to sort the data
+    const column = link.dataset.target;
     // publish sort
-    this.dispatch('sort', {attr, asc});
+    this.dispatch('sort', { column });
   }
 
   render() {
