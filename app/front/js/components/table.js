@@ -1,46 +1,52 @@
-import { bind, wire, Component } from 'https://unpkg.com/hyperhtml?module';
+import { bind, wire, Component }
+  from 'https://unpkg.com/hyperhtml?module';
+import { thead } from './thead.js';
 
-class Table extends Component {
+class table extends Component {
   constructor(props) {
     super();
     this.props = props;
+    console.log(props);
   }
+
   get defaultState() {
     return {
+      id: '',
+      data: [],
       sorted: ''
     }
   }
-  onclick(e) {
-    //stop the regular link behaviour
+
+  onsort(e) {
+    //console.log(e, this, e.currentTarget, e.detail)
     e.preventDefault();
-    //get the current link
-    const link = e.target;
-    //read the attribute data-target, this will tell use how to sort the ary
-    const attr = link.dataset.target;
-    //check if the user clicked on the same attr
-    let asc = this.state.sorted === attr;
-    //simple sort, reverse the sort if asc is true
-    this.props.data.sort((a, b) => (''+a[attr]).localeCompare(''+b[attr]) * (asc ? 1 : -1));
-    //update the sorted attr
+    // get the sort details
+    const {attr, asc} = e.detail;
+    // simple sort, reverse the sort if asc is true
+    this.data.sort((a, b) =>
+      (''+a[attr]).localeCompare(''+b[attr]) * (asc ? 1 : -1));
+    // update the sorted attr
     this.setState({
-      sorted: asc ? '' : attr
+       sorted: asc ? '' : attr
     });
-    //no render set state will do a render
+    // no render set state will do a render
   }
+
   render() {
+    // TODO verify all objects share the same headers
     // Take column labels from first object
     const headers = Object.keys(this.props.data[0]);
-    // TODO verify all objects share the same headers
 
     return this.html`
     <table id="${this.props.id}">
-      <thead>
-        <tr>
-          ${headers.map(v => `<th><a onclick="${this}" data-target="${v}" href="#">${v.toUpperCase()}</a></th>`)}
-        </tr>
-      </thead>
+    <table id="${this.props.id}"
+      onsort="${this}"
+      >
+      ${thead.for(this).update(this.props)}
       <tbody>
-        ${this.props.data.map(obj => wire(obj)`<tr>${headers.map(v => `<td>${obj[v]}</td>`)}</tr>`)}
+        ${this.props.data.map(obj =>
+          wire(obj)`<tr>${headers.map(v =>
+            `<td>${obj[v]}</td>`)}</tr>`)}
       </tbody>
     </table>
   `;
@@ -48,5 +54,5 @@ class Table extends Component {
 };
 
 export {
-  Table
+  table
 };

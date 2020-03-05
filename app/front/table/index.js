@@ -1,5 +1,5 @@
 import { bind } from 'https://unpkg.com/hyperhtml?module';
-import { Table } from '../js/components/table.js';
+import { table } from '../js/components/table.js';
 
 const data = [
   { producto: 'banana', cantidad: 1, precio: 12.99 },
@@ -7,4 +7,4 @@ const data = [
   { producto: 'papa', cantidad: 3, precio: 7.99 },
 ];
 
-bind(document.body)`${new Table({ data, id: 'myTable' })}`;
+bind(document.body)`${new table({ data, id: 'myTable' })}`;
