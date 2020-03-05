@@ -1,6 +1,6 @@
 import { bind, wire, Component } from 'https://unpkg.com/hyperhtml?module';
 
-export class Table extends Component {
+class Table extends Component {
   constructor(props) {
     super();
     this.props = props;
@@ -45,4 +45,8 @@ export class Table extends Component {
     </table>
   `;
   }
+};
+
+export {
+  Table
 };
