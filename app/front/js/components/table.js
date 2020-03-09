@@ -2,7 +2,7 @@ import { bind, wire, Component }
   from 'https://unpkg.com/hyperhtml?module';
 import { thead } from './thead.js';
 import { tbody } from './tbody.js';
-import { tfooter } from './tfoot.js';
+import { tfoot } from './tfoot.js';
 
 class table extends Component {
   constructor(props) {
